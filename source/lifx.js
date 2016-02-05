@@ -1,4 +1,5 @@
 var request = require('request'),
+    utils = require('./utils'),
     _ = require('lodash'),
     Q = require('q');
 
@@ -26,86 +27,6 @@ function Client(settings) {
 
     return this;
 }
-
-/**
- * Checks the HTTP response code and returns the according error message.
- *
- * See: <http://api.developer.lifx.com/docs/errors>
- *
- * @param {object} response
- * @param {string} body
- * @returns {string}
- */
-var checkForErrors = function(response, body) {
-    var responseCodes = [
-        { codes: 400, message: 'Request was invalid.' },
-        { codes: 401, message: 'Bad access token.' },
-        { codes: 403, message: 'Bad OAuth scope.' },
-        { codes: 404, message: 'Selector did not match any lights.' },
-        { codes: 422, message: 'Missing or malformed parameters' },
-        { codes: 426, message: 'HTTP was used to make the request instead of HTTPS. Repeat the request using HTTPS instead.' },
-        { codes: 429, message: 'The request exceeded a rate limit.' },
-        { codes: [ 500, 502, 503, 523 ], message: 'Something went wrong on Lif\'s end.' }
-    ];
-
-    var error = '';
-    responseCodes.every(function(responseCode) {
-        if(_.isArray(responseCode.codes)) {
-            responseCode.codes.forEach(function(code) {
-                if (code === response.statusCode) {
-                    error = responseCode.message;
-                    return false;
-                }
-
-                return true;
-            });
-        }
-    });
-
-    // Special case HTTP code 422 Unprocessable Entity
-    if(response.statusCode === 422) {
-        error = body.error;
-    }
-
-    return error;
-};
-
-/**
- * Checks the light selector if it's valid.
- *
- * See: <http://api.developer.lifx.com/docs/selectors>
- *
- * @param {string} selector
- * @returns {boolean}
- */
-var verifySelector = function(selector) {
-    var validSelectors = [
-        'all',
-        'label:',
-        'id:',
-        'group_id:',
-        'group:',
-        'location_id:',
-        'location:',
-        'scene_id:'
-    ], isValid = false;
-
-    if(!selector || !selector.length) {
-        return false;
-    }
-
-    validSelectors.every(function(sel) {
-        if(selector.startsWith(sel)) {
-            isValid = true;
-
-            return false;
-        }
-
-        return true;
-    });
-
-    return isValid;
-};
 
 /**
  * Returns the api version.
@@ -182,7 +103,7 @@ Client.prototype.setBearerToken = function(token) {
     if(!token || !token.length) {
         return false;
     }
-    this.settings.token = token;
+    this.settings.bearerToken = token;
 
     return true;
 };
@@ -217,7 +138,7 @@ Client.prototype.send = function(settings, cb) {
     settings = _.merge(defaults, settings);
 
     request(settings, function(err, response, body) {
-        var errors = checkForErrors(response, body);
+        var errors = utils.checkForErrors(response, body);
         if(err || errors.length) {
             cb(err || errors, null);
             return;
@@ -237,7 +158,7 @@ Client.prototype.listLights = function(selector, cb) {
     var deferred = Q.defer();
 
     selector = selector || 'all';
-    if(!verifySelector(selector)) {
+    if(!utils.verifySelector(selector)) {
         throw new Error('Selector is not valid.');
     }
 
@@ -278,7 +199,7 @@ Client.prototype.setState = function(selector, settings, cb) {
     var deferred = Q.defer();
 
     selector = selector || 'all';
-    if(!verifySelector(selector)) {
+    if(!utils.verifySelector(selector)) {
         throw new Error('Selector is not valid.');
     }
 
@@ -334,7 +255,7 @@ Client.prototype.togglePower = function(selector, duration, cb) {
     var deferred = Q.defer();
 
     selector = selector || 'all';
-    if(!verifySelector(selector)) {
+    if(!utils.verifySelector(selector)) {
         throw new Error('Selector is not valid.');
     }
 
@@ -363,7 +284,7 @@ Client.prototype.breathe = function(selector, settings, cb) {
     var deferred = Q.defer();
 
     selector = selector || 'all';
-    if(!verifySelector(selector)) {
+    if(!utils.verifySelector(selector)) {
         throw new Error('Selector is not valid.');
     }
 
@@ -396,7 +317,7 @@ Client.prototype.pulse = function(selector, settings, cb) {
     var deferred = Q.defer();
 
     selector = selector || 'all';
-    if(!verifySelector(selector)) {
+    if(!utils.verifySelector(selector)) {
         throw new Error('Selector is not valid.');
     }
 
@@ -429,7 +350,7 @@ Client.prototype.cycle = function(selector, settings, cb) {
     var deferred = Q.defer();
 
     selector = selector || 'all';
-    if(!verifySelector(selector)) {
+    if(!utils.verifySelector(selector)) {
         throw new Error('Selector is not valid.');
     }
 
@@ -462,7 +383,7 @@ Client.prototype.activateScene = function(selector, duration, cb) {
     var deferred = Q.defer();
 
     selector = selector || 'all';
-    if(!verifySelector(selector)) {
+    if(!utils.verifySelector(selector)) {
         throw new Error('Selector is not valid.');
     }
 
@@ -479,6 +400,13 @@ Client.prototype.activateScene = function(selector, duration, cb) {
     return deferred.promise.nodeify(cb);
 };
 
+/**
+ * Validates any given color string against the api. The api returns the converted color as a response
+ *
+ * @param {string} color
+ * @param {function} cb
+ * @returns {*} either the promise or nothing
+ */
 Client.prototype.validateColor = function(color, cb) {
     var deferred = Q.defer();
 

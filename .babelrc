@@ -1,0 +1,5 @@
+{
+    "sourceMaps":  true,
+    "sourceRoot": "/source",
+    "presets": [ "es2015" ]
+}
