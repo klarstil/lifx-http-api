@@ -35,8 +35,5 @@ node_modules
 # Idea project directory (e.g. PhpStorm, WebStorm ...)
 .idea
 
-# Don't publish the source folder
-source
-
 # Ignore test files
 bearer-token.txt
