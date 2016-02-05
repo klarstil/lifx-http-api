@@ -5,7 +5,7 @@
   "main": "source/lifx.js",
   "scripts": {
     "build": "node_modules/.bin/babel source --presets babel-preset-es2015 --out-dir dist",
-    "test": "npm run build && node_modules/.bin/mocha -w"
+    "test": "npm run build && node_modules/.bin/mocha"
   },
   "keywords": [
     "lifx",

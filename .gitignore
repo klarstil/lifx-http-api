@@ -39,4 +39,4 @@ node_modules
 dist
 
 # Ignore test file
-bearer-token.txt
+/bearer-token.txt
