@@ -40,3 +40,6 @@ dist
 
 # Ignore test file
 /bearer-token.txt
+
+# Ignore coverage report
+coverage

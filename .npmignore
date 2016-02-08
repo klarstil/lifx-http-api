@@ -37,3 +37,9 @@ node_modules
 
 # Ignore test files
 bearer-token.txt
+
+# Don't publish the actual source
+source
+
+# Ignore coverage report
+coverage
