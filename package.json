@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/klarstil/lifx-http-api/issues"
   },
-  "license": "GPL-3.0",
+  "license": "MIT",
   "dependencies": {
     "lodash": "^4.2.1",
     "q": "^1.4.1",

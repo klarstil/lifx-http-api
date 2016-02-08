@@ -1,10 +1,10 @@
 # Lifx HTTP Api Node.js Wrapper
 
-[![NPM Version](https://img.shields.io/npm/v/lifx-http-api.svg)](https://www.npmjs.com/package/lifx-http-api) ![Dependency Status](https://david-dm.org/klarstil/lifx-http-api.svg) [![Build Status](https://travis-ci.org/klarstil/lifx-http-api.svg?branch=master)](https://travis-ci.org/klarstil/lifx-http-api)
+[![NPM Version](https://img.shields.io/npm/v/lifx-http-api.svg)](https://www.npmjs.com/package/lifx-http-api) ![Dependency Status](https://david-dm.org/klarstil/lifx-http-api.svg) [![Build Status](https://travis-ci.org/klarstil/lifx-http-api.svg?branch=master)](https://travis-ci.org/klarstil/lifx-http-api) [![License MIT](https://img.shields.io/badge/license-mit-brightgreen.svg)](https://github.com/klarstil/lifx-http-api/blob/master/LICENSE)
 
 A thin Node.js API wrapper of the [Lifx HTTP protocol](http://api.developer.lifx.com/).
 
-This library is not, in any way, affiliated or related to LiFi Labs, Inc.. Use at your own risk.
+This library is not, in any way, affiliated or related to Lifi Labs, Inc.. Use at your own risk.
 
 ## Installation
 
@@ -74,29 +74,6 @@ client.listLights('all', function(err, data) {
 
 // Using promises
 client.listLights('all').then(console.log, console.error);
-```
-
-#### `client.listScenes([cb])`
-Lists all the scenes available in the users account.
-
-Option | Type | Default | Description
------- | ---- | ------- | -----------
-`cb` | function | null | `function(err, data) {}` Callback function which will be called when the HTTP request to the API was processed.
-
-**Usage example:**
-```js
-// Using callbacks
-client.listScene(function(err, data) {
-    if(err) {
-    	console.error(err);
-    	return;
-    }
-    
-    console.log(data)
-});
-
-// Using promises
-client.listScenes().then(console.log, console.error);
 ```
 
 ### Modifying light state
@@ -287,6 +264,31 @@ client.cycle('all', {
 });
 ```
 
+### Working with scenes
+
+#### `client.listScenes([cb])`
+Lists all the scenes available in the users account.
+
+Option | Type | Default | Description
+------ | ---- | ------- | -----------
+`cb` | function | null | `function(err, data) {}` Callback function which will be called when the HTTP request to the API was processed.
+
+**Usage example:**
+```js
+// Using callbacks
+client.listScene(function(err, data) {
+    if(err) {
+    	console.error(err);
+    	return;
+    }
+    
+    console.log(data)
+});
+
+// Using promises
+client.listScenes().then(console.log, console.error);
+```
+
 #### `client.activateScene(selector, [duration], [cb])`
 Activates a scene from the users account.
 
@@ -309,6 +311,8 @@ client.activateScene('scene_id:d073d501cf2c', 1.2, function (err, data) {
 });
 ```
 
+### Utility methods
+
 #### `client.validateColor(color, [cb])`
 This method lets you validate a user's color string and return the hue, saturation, brightness and kelvin values that the API will interpret as.
 
@@ -328,6 +332,102 @@ client.validateColor('#0198E1', function (err, data) {
 
     console.log(data)
 });
+```
+
+### Client API
+
+#### `client.getVersion()`
+Returns the api version.
+
+**Usage example:**
+```js
+client.getVersion();  // outputs "v1"
+```
+
+#### `client.setVersion(version)`
+Sets the api version. Returns `true` if the version was set sucessfully, otherwise `false`.
+ 
+Option | Type | Default | Description
+------ | ---- | ------- | -----------
+`version` | string | | API version which will be used by the `Client` object.
+
+**Usage example:**
+```js
+client.setVersion('v2beta');
+```
+
+#### `client.getUrl()`
+Returns the api url.
+
+**Usage example:**
+```js
+client.getUrl();  // outputs "https://lifx.com/api/"
+```
+
+#### `client.setUrl(url)`
+Sets the api url. Returns `true` if the url was set sucessfully, otherwise `false`.
+ 
+Option | Type | Default | Description
+------ | ---- | ------- | -----------
+`url` | string | | API url which will be used by the `Client` object.
+
+**Usage example:**
+```js
+client.setUrl('https://my-lifx-api-url.com');
+```
+
+#### `client.getApiUrl()`
+Returns the full Lifx api endpoint
+
+
+**Usage example:**
+```js
+client.getApiUrl(); // outputs "https://lifx.com/api/v1"
+```
+
+#### `client.getBearerToken()`
+Returns the bearer authentication token.
+
+**Usage example:**
+```js
+client.getBearerToken();  // outputs "<your-token>"
+```
+
+#### `client.setBearerToken(token)`
+Sets the bearer authentication token. Returns `true` if the token was set sucessfully, otherwise `false`.
+ 
+Option | Type | Default | Description
+------ | ---- | ------- | -----------
+`token` | string | | Bearer authentication token which will be used by the `Client` object.
+
+**Usage example:**
+```js
+client.setBearerToken('<your-token>');
+```
+
+#### `client.send(settings, cb)`
+Sends a request to the Lifx API.
+
+Option | Type | Default | Description
+------ | ---- | ------- | -----------
+`settings` | Object | `{}` | `request` configuration settings. See the [offical documentation](https://github.com/request/request) for further information.
+`cb` | function | null | `function(err, data) {}` Callback function which will be called when the HTTP request to the API was processed.
+
+**Usage example:**
+```js
+client.send({
+    url: 'lights/all/state',
+    body: {
+        power: 'on',
+        color: 'blue saturation:0.5',
+        brightness: 0.5,
+        duration: 5        
+    },
+    method: 'PUT'
+}, function(err, data) {
+    if (err) console.error(err);
+    else console.log(data);
+})
 ```
 
 ### Client settings
