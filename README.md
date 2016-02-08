@@ -9,7 +9,7 @@ This library is not, in any way, affiliated or related to LiFi Labs, Inc.. Use a
 ## Installation
 
 ```sh
-$ npm install http-lifx-api --save
+$ npm install lifx-http-api --save
 ```
 
 ## Compatibility
