@@ -4,6 +4,7 @@
   "description": "Thin wrapper around the Lifx HTTP API",
   "main": "source/lifx.js",
   "scripts": {
+    "prepublish": "npm run build",
     "build": "node_modules/.bin/babel source --presets babel-preset-es2015 --out-dir dist",
     "test": "npm run build && node_modules/.bin/mocha"
   },

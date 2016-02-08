@@ -82,7 +82,7 @@ Client.prototype.setUrl = function(url) {
  * @returns {string}
  */
 Client.prototype.getApiUrl = function() {
-    return [ this.settings.url, this.settings.version ].join('');
+    return `${this.settings.url}${this.settings.version}`;
 };
 
 /**
@@ -130,7 +130,7 @@ Client.prototype.send = function(settings, cb) {
         method: 'GET',
         baseUrl: this.getApiUrl(),
         headers: {
-            Authorization: [ 'Bearer', this.getBearerToken() ].join(' ')
+            Authorization: `Bearer ${this.getBearerToken()}`
         }
     };
 
