@@ -1,6 +1,6 @@
 # Lifx HTTP Api Node.js Wrapper
 
-![Dependency Status](https://david-dm.org/klarstil/lifx-http-api.svg)
+[![NPM Version](https://img.shields.io/npm/v/lifx-http-api.svg)](https://www.npmjs.com/package/lifx-http-api) ![Dependency Status](https://david-dm.org/klarstil/lifx-http-api.svg)
 
 A thin Node.js API wrapper of the [Lifx HTTP protocol](http://api.developer.lifx.com/).
 
