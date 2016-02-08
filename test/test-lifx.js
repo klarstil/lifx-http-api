@@ -54,6 +54,7 @@ describe('Lifx HTTP API wrapper', function() {
             });
 
             expect(client.setVersion(data)).to.be.true;
+            expect(client.setVersion()).to.be.false;
             expect(client.getVersion()).to.equal(data);
         });
 
@@ -65,6 +66,7 @@ describe('Lifx HTTP API wrapper', function() {
             });
 
             expect(client.setUrl(data)).to.be.true;
+            expect(client.setUrl()).to.be.false;
             expect(client.getUrl()).to.equal(data);
         });
 
@@ -76,6 +78,7 @@ describe('Lifx HTTP API wrapper', function() {
             });
 
             expect(client.setBearerToken(data)).to.be.true;
+            expect(client.setBearerToken()).to.be.false;
             expect(client.getBearerToken()).to.equal(data);
         });
 
@@ -129,7 +132,7 @@ describe('Lifx HTTP API wrapper', function() {
                 client.listLights('testing');
             }).to.throw(Error);
 
-            client.listLights('all').then(function(data) {
+            client.listLights('all', function(data) {
                 var light = data[0];
 
                 expect(light).to.have.keys([
@@ -144,7 +147,7 @@ describe('Lifx HTTP API wrapper', function() {
                 bearerToken: token
             });
 
-            client.listScenes().then(function(data) {
+            client.listScenes(function(data) {
                 var scene = data[0];
 
                 expect(scene).to.have.keys([
@@ -158,7 +161,11 @@ describe('Lifx HTTP API wrapper', function() {
                 bearerToken: token
             });
 
-            client.validateColor('#ff000f').then(function(data) {
+            expect(function() {
+                client.validateColor();
+            }).to.throw(Error);
+
+            client.validateColor('#ff000f', function(data) {
                 expect(data).to.have.keys([
                     'hue', 'saturation', 'brightness', 'kelvin'
                 ]);
@@ -170,7 +177,11 @@ describe('Lifx HTTP API wrapper', function() {
                 bearerToken: token
             });
 
-            client.togglePower('all').then(function(data) {
+            expect(function() {
+                client.setState('testing');
+            }).to.throw(Error);
+
+            client.togglePower('all', function(data) {
                 expect(data.result).to.be.instanceof(Array);
 
                 var result = data.result[0];
@@ -186,9 +197,13 @@ describe('Lifx HTTP API wrapper', function() {
                 bearerToken: token
             });
 
+            expect(function() {
+                client.setState('testing');
+            }).to.throw(Error);
+
             client.setState('all', {
                 power: 'on'
-            }).then(function(data) {
+            }, function(data) {
                 expect(data.result).to.be.instanceof(Array);
 
                 var result = data.result[0];
