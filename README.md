@@ -1,6 +1,6 @@
 # Lifx HTTP Api Node.js Wrapper
 
-[![NPM Version](https://img.shields.io/npm/v/lifx-http-api.svg)](https://www.npmjs.com/package/lifx-http-api) ![Dependency Status](https://david-dm.org/klarstil/lifx-http-api.svg) [![Build Status](https://travis-ci.org/klarstil/lifx-http-api.svg?branch=master)](https://travis-ci.org/klarstil/lifx-http-api) [![License MIT](https://img.shields.io/badge/license-mit-brightgreen.svg)](https://github.com/klarstil/lifx-http-api/blob/master/LICENSE)
+[![NPM Version](https://img.shields.io/npm/v/lifx-http-api.svg)](https://www.npmjs.com/package/lifx-http-api) ![Dependency Status](https://david-dm.org/klarstil/lifx-http-api.svg) [![Build Status](https://travis-ci.org/klarstil/lifx-http-api.svg?branch=master)](https://travis-ci.org/klarstil/lifx-http-api) [![License MIT](https://img.shields.io/badge/license-mit-brightgreen.svg)](https://github.com/klarstil/lifx-http-api/blob/master/LICENSE) [![codecov.io](https://codecov.io/github/klarstil/lifx-http-api/coverage.svg?branch=master)](https://codecov.io/github/klarstil/lifx-http-api?branch=master)
 
 A thin Node.js API wrapper of the [Lifx HTTP protocol](http://api.developer.lifx.com/).
 
