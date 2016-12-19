@@ -31,7 +31,8 @@ module.exports = {
         });
 
         // Special case HTTP code 422 Unprocessable Entity
-        if (response.statusCode === 422) {
+        // BUG FIXED: response is undefined some times, so added check if response object is available
+        if (response && response.statusCode === 422) {
             error = body.error;
         }
 
