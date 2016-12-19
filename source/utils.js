@@ -38,7 +38,7 @@ module.exports = {
         });
 
         // Special case HTTP code 422 Unprocessable Entity
-        if(response.statusCode === 422) {
+        if(response && response.statusCode === 422) {
             error = body.error;
         }
 
