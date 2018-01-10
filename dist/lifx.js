@@ -410,8 +410,8 @@ Client.prototype.validateColor = function (color, cb) {
 
     this.send({
         url: 'color',
-        qs: { color: color },
-        method: 'PUT'
+        qs: { string: color },
+        method: 'GET'
     }, function (err, data) {
         if (err) deferred.reject(err);else deferred.resolve(data);
     });
