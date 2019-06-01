@@ -383,7 +383,7 @@ Client.prototype.activateScene = function (selector, duration, cb) {
 
     duration = duration || 0;
     this.send({
-        url: 'lights/' + selector + '/cycle',
+        url: 'scenes/' + selector + '/activate',
         body: { duration: duration },
         method: 'PUT'
     }, function (err, data) {
