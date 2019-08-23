@@ -383,7 +383,7 @@ Client.prototype.activateScene = function (selector, duration, cb) {
 
     duration = duration || 0;
     this.send({
-        url: 'lights/' + selector + '/cycle',
+        url: 'scenes/' + selector + '/activate',
         body: { duration: duration },
         method: 'PUT'
     }, function (err, data) {
@@ -410,8 +410,8 @@ Client.prototype.validateColor = function (color, cb) {
 
     this.send({
         url: 'color',
-        qs: { color: color },
-        method: 'PUT'
+        qs: { string: color },
+        method: 'GET'
     }, function (err, data) {
         if (err) deferred.reject(err);else deferred.resolve(data);
     });
