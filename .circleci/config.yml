@@ -22,4 +22,8 @@ jobs:
           name: test
           command: npm test
           environment:
-            JEST_JUNIT_OUTPUT_DIR: "junit.xml"
+            JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
+    - store_test_results:
+        path: reports/junit
+    - store_artifacts:
+        path: reports/junit
