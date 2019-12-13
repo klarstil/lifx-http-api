@@ -41,4 +41,7 @@ node_modules
 # Ignore coverage report
 coverage
 
+# Ignore env file
 .env
+
+# Ignore junit jest file
