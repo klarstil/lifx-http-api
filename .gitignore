@@ -45,3 +45,4 @@ coverage
 .env
 
 # Ignore junit jest file
+junit.xml
