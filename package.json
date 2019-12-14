@@ -22,6 +22,8 @@
     "typescript": "^3.5.1"
   },
   "scripts": {
+    "prepare": "npm run build:js",
+    "prepublishOnly": "npm run build",
     "test": "jest --ci --runInBand --reporters=default --reporters=jest-junit",
     "test:watch": "jest --watch",
     "type-check": "tsc --noEmit",
