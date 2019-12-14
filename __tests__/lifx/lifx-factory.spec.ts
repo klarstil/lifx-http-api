@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import LifxFactory from '../../src/lifx/lifx-factory';
 import SelectorCriteria from '../../src/criteria/selector-criteria';
-import LifxDevice from '../../src/lifx/lifx-device';
 import {
     lightsFixtures,
     sceneFixtures,
@@ -27,7 +26,6 @@ describe('lifx factory', () => {
 
         factory.getLights(selectorCriteria).then((devices: any) => {
             expect(devices.length).toBe(3);
-            expect(devices[0]).toBeInstanceOf(LifxDevice);
             done();
         });
         mockAxios.mockResponse({ data: lightsFixtures } as AxiosResponse);
