@@ -40,5 +40,9 @@
   "bugs": {
     "url": "https://github.com/klarstil/lifx-http-api/issues"
   },
-  "homepage": "https://github.com/klarstil/lifx-http-api#readme"
+  "homepage": "https://github.com/klarstil/lifx-http-api#readme",
+  "engines": {
+    "node": ">=10.17",
+    "npm": ">=6.5"
+  }
 }

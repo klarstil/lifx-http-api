@@ -1,8 +1,8 @@
 import httpClientFactory from '../service/http-client';
-import { AxiosInstance, AxiosResponse, AxiosPromise } from 'axios';
+import { AxiosInstance, AxiosResponse } from 'axios';
 import SelectorCriteria from '../criteria/selector-criteria';
 import LifxDevice from './lifx-device';
-import { LifxEffectResult, LifxScene } from '../../@types/lifx';
+import { LifxEffectResult, LifxScene, LifxStateOptions, LifxMultiStatesOptions, LifxMultiStatesResult } from '../../@types/lifx';
 
 export default class LifxFactory {
     client: AxiosInstance;
@@ -34,7 +34,7 @@ export default class LifxFactory {
         });
     }
 
-    toggleEffectsOff(selector: SelectorCriteria, powerOff = false) {
+    toggleEffectsOff(selector: SelectorCriteria, powerOff: boolean = false) {
         return this.client.post(`lights/${selector.getSelector()}/effects/off`, {
             power_off: powerOff
         }).then((response: AxiosResponse) => {

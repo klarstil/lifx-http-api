@@ -58,7 +58,8 @@ export interface LifxStateOptions {
 
 export interface LifxMultiStatesOptions {
     states: Array<LifxStateOptions>,
-    defaults: LifxStateOptions
+    defaults: LifxStateOptions,
+    fast?: boolean
 }
 
 export interface LifxEffectOptions {
@@ -112,4 +113,14 @@ export interface LifxEffectResultDevice {
 
 export interface LifxEffectResult {
     results: LifxEffectResultDevice[]
+}
+
+export interface LifxMultiStatesOperations {
+    operation: LifxStateOptions,
+    results: LifxEffectResult
+    error?: string
+}
+
+export interface LifxMultiStatesResult {
+    results: LifxMultiStatesOperations[]
 }
