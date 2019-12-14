@@ -35,9 +35,6 @@ node_modules
 # Idea project directory (e.g. PhpStorm, WebStorm ...)
 .idea
 
-# Ignore test file
-/bearer-token.txt
-
 # Ignore coverage report
 coverage
 
