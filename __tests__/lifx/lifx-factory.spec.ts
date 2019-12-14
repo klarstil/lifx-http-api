@@ -14,7 +14,7 @@ dotenv.config();
 
 describe('lifx factory', () => {
     afterEach(() => {
-        // cleaning up the mess left behind the previous test
+    // cleaning up the mess left behind the previous test
         mockAxios.reset();
     });
 

@@ -5,7 +5,7 @@ export default class SelectorCriteria {
         this.selectors = [];
     }
 
-    setAll(random: boolean = false) {
+    setAll(random = false): SelectorCriteria {
         this.selectors.push(`all${random ? ':random' : ''}`);
         
         return this;
@@ -31,7 +31,7 @@ export default class SelectorCriteria {
         return this;
     }
 
-    setGroup(value: string, random: boolean = false): SelectorCriteria {
+    setGroup(value: string, random = false): SelectorCriteria {
         if (!value || !value.length) {
             throw Error('Group is not valid, please provide a valid group');
         }
@@ -41,7 +41,7 @@ export default class SelectorCriteria {
         return this;
     }
 
-    setGroupId(value: string, random: boolean = false): SelectorCriteria {
+    setGroupId(value: string, random = false): SelectorCriteria {
         if (!value || !value.length) {
             throw Error('Group id is not valid, please provide a valid group id');
         }
@@ -51,7 +51,7 @@ export default class SelectorCriteria {
         return this;
     }
 
-    setLocation(value: string, random: boolean = false): SelectorCriteria {
+    setLocation(value: string, random = false): SelectorCriteria {
         if (!value || !value.length) {
             throw Error('Location is not valid, please provide a valid location');
         }
@@ -61,7 +61,7 @@ export default class SelectorCriteria {
         return this;
     }
 
-    setLocationId(value: string, random: boolean = false): SelectorCriteria {
+    setLocationId(value: string, random = false): SelectorCriteria {
         if (!value || !value.length) {
             throw Error('Location id is not valid, please provide a valid location id');
         }
@@ -71,7 +71,7 @@ export default class SelectorCriteria {
         return this;
     }
 
-    setSceneId(value: string, random: boolean = false): SelectorCriteria {
+    setSceneId(value: string, random = false): SelectorCriteria {
         if (!value || !value.length) {
             throw Error('Scene id is not valid, please provide a valid scene id');
         }

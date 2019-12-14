@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-export default (bearerToken: string, apiVersion: string = 'v1'): AxiosInstance => {
+export default (bearerToken: string, apiVersion = 'v1'): AxiosInstance => {
     return axios.create({
         baseURL: `https://api.lifx.com/${apiVersion}/`,
         headers: {

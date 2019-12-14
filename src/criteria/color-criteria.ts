@@ -117,7 +117,7 @@ export default class ColorCriteria {
             saturation: this.saturation,
             brightness: this.brightness,
             kelvin: this.kelvin
-        };
+        }
 
         if (this.color) {
             return this.color;
@@ -125,10 +125,10 @@ export default class ColorCriteria {
 
         return Object.entries(color).reduce((accumulator: string, [key, value]: [string, number]) => {
             if (value === null) {
-              return accumulator;
+                return accumulator;
             }
       
             return `${key}:${value} ${accumulator} `;
-          }, '').trim() || null;
+        }, '').trim() || null;
     }
 }

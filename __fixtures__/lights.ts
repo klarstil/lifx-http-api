@@ -44,94 +44,94 @@ const lights: LifxApiDevice[] = [{
     "connected": true,
     "power": "on",
     "color": {
-      "hue": 0,
-      "saturation": 1,
-      "kelvin": 3500
+        "hue": 0,
+        "saturation": 1,
+        "kelvin": 3500
     },
     "brightness": 0.29999237048905164,
     "zones": {
-      "count": 8,
-      "zones": [
-        {
-          "brightness": 0.3,
-          "hue": 0,
-          "kelvin": 3500,
-          "saturation": 1,
-          "zone": 0
-        },
-        {
-          "brightness": 0.3,
-          "hue": 60,
-          "kelvin": 3500,
-          "saturation": 1,
-          "zone": 1
-        },
-        {
-          "brightness": 0.3,
-          "hue": 40,
-          "kelvin": 3500,
-          "saturation": 1,
-          "zone": 2
-        },
-        {
-          "brightness": 0.3,
-          "hue": 127,
-          "kelvin": 3500,
-          "saturation": 1,
-          "zone": 3
-        },
-        {
-          "brightness": 0.3,
-          "hue": 294,
-          "kelvin": 3500,
-          "saturation": 1,
-          "zone": 4
-        },
-        {
-          "brightness": 0.3,
-          "hue": 238.99,
-          "kelvin": 3500,
-          "saturation": 1,
-          "zone": 5
-        },
-        {
-          "brightness": 0.3,
-          "hue": 271,
-          "kelvin": 3500,
-          "saturation": 1,
-          "zone": 6
-        },
-        {
-          "brightness": 0.3,
-          "hue": 271,
-          "kelvin": 3500,
-          "saturation": 1,
-          "zone": 7
-        }
-      ]
+        "count": 8,
+        "zones": [
+            {
+                "brightness": 0.3,
+                "hue": 0,
+                "kelvin": 3500,
+                "saturation": 1,
+                "zone": 0
+            },
+            {
+                "brightness": 0.3,
+                "hue": 60,
+                "kelvin": 3500,
+                "saturation": 1,
+                "zone": 1
+            },
+            {
+                "brightness": 0.3,
+                "hue": 40,
+                "kelvin": 3500,
+                "saturation": 1,
+                "zone": 2
+            },
+            {
+                "brightness": 0.3,
+                "hue": 127,
+                "kelvin": 3500,
+                "saturation": 1,
+                "zone": 3
+            },
+            {
+                "brightness": 0.3,
+                "hue": 294,
+                "kelvin": 3500,
+                "saturation": 1,
+                "zone": 4
+            },
+            {
+                "brightness": 0.3,
+                "hue": 238.99,
+                "kelvin": 3500,
+                "saturation": 1,
+                "zone": 5
+            },
+            {
+                "brightness": 0.3,
+                "hue": 271,
+                "kelvin": 3500,
+                "saturation": 1,
+                "zone": 6
+            },
+            {
+                "brightness": 0.3,
+                "hue": 271,
+                "kelvin": 3500,
+                "saturation": 1,
+                "zone": 7
+            }
+        ]
     },
     "effect": "OFF",
     "group": {
-      "id": "f2b54076395411e9a0757200055bf1c0",
-      "name": "Kitchen"
+        "id": "f2b54076395411e9a0757200055bf1c0",
+        "name": "Kitchen"
     },
     "location": {
-      "id": "f2c1aa82395411e9a0757200055bf1c0",
-      "name": "Home"
+        "id": "f2c1aa82395411e9a0757200055bf1c0",
+        "name": "Home"
     },
     "product": {
-      "name": "LIFX Z",
-      "identifier": "lifx_z2",
-      "company": "LIFX",
-      "capabilities": {
-        "has_color": true,
-        "has_variable_color_temp": true,
-        "has_ir": false,
-        "has_chain": false,
-        "has_multizone": true,
-        "min_kelvin": 2500,
-        "max_kelvin": 9000
-      }
+        "name": "LIFX Z",
+        "identifier": "lifx_z2",
+        "company": "LIFX",
+        "capabilities": {
+            "has_color": true,
+            "has_variable_color_temp": true,
+            "has_ir": false,
+            "has_chain": false,
+            "has_multizone": true,
+            "min_kelvin": 2500,
+            "max_kelvin": 9000
+        }
     },
     "last_seen": "2019-02-25T23:40:56Z",
     "seconds_since_seen": 0
@@ -142,55 +142,55 @@ const lights: LifxApiDevice[] = [{
     "connected": true,
     "power": "on",
     "color": {
-      "hue": 38.83726253147174,
-      "saturation": 1,
-      "kelvin": 3500
+        "hue": 38.83726253147174,
+        "saturation": 1,
+        "kelvin": 3500
     },
     "brightness": 0.09999237048905166,
     "effect": "OFF",
     "chain": {
-      "count": 2,
-      "children": [
-        {
-          "height": 8,
-          "index": 0,
-          "user_x": 0,
-          "user_y": 0,
-          "width": 8
-        },
-        {
-          "height": 8,
-          "index": 1,
-          "user_x": 1,
-          "user_y": 0,
-          "width": 8
-        }
-      ]
+        "count": 2,
+        "children": [
+            {
+                "height": 8,
+                "index": 0,
+                "user_x": 0,
+                "user_y": 0,
+                "width": 8
+            },
+            {
+                "height": 8,
+                "index": 1,
+                "user_x": 1,
+                "user_y": 0,
+                "width": 8
+            }
+        ]
     },
     "group": {
-      "id": "f2b54076395411e9a0757200055bf1c0",
-      "name": "Kitchen"
+        "id": "f2b54076395411e9a0757200055bf1c0",
+        "name": "Kitchen"
     },
     "location": {
-      "id": "f2c1aa82395411e9a0757200055bf1c0",
-      "name": "Home"
+        "id": "f2c1aa82395411e9a0757200055bf1c0",
+        "name": "Home"
     },
     "product": {
-      "name": "LIFX Tile",
-      "identifier": "lifx_tile",
-      "company": "LIFX",
-      "capabilities": {
-        "has_color": true,
-        "has_variable_color_temp": true,
-        "has_ir": false,
-        "has_chain": true,
-        "has_multizone": false,
-        "min_kelvin": 2500,
-        "max_kelvin": 9000
-      }
+        "name": "LIFX Tile",
+        "identifier": "lifx_tile",
+        "company": "LIFX",
+        "capabilities": {
+            "has_color": true,
+            "has_variable_color_temp": true,
+            "has_ir": false,
+            "has_chain": true,
+            "has_multizone": false,
+            "min_kelvin": 2500,
+            "max_kelvin": 9000
+        }
     },
     "last_seen": "2019-02-25T23:41:19Z",
     "seconds_since_seen": 0
-  }];
+}];
 
 export default lights;

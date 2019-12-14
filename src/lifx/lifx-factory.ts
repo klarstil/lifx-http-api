@@ -1,7 +1,7 @@
 import httpClientFactory from '../service/http-client';
 import { AxiosInstance, AxiosResponse } from 'axios';
 import SelectorCriteria from '../criteria/selector-criteria';
-import { LifxEffectResult, LifxScene, LifxStateOptions, LifxMultiStatesOptions, LifxMultiStatesResult, LifxApiDevice } from '../../@types/lifx';
+import { LifxEffectResult, LifxScene, LifxApiDevice } from '../../@types/lifx';
 
 export default class LifxFactory {
     client: AxiosInstance;
@@ -13,7 +13,7 @@ export default class LifxFactory {
     getLights(selector: SelectorCriteria): Promise<LifxApiDevice[]> {
         return this.client.get(`lights/${selector.getSelector()}`)
             .then((response: AxiosResponse) => {
-                 return response.data as LifxApiDevice[];
+                return response.data as LifxApiDevice[];
             });
     }
 
@@ -23,7 +23,7 @@ export default class LifxFactory {
         });
     }
     
-    togglePower(selector: SelectorCriteria, duration: number = 1.0): Promise<LifxEffectResult> {
+    togglePower(selector: SelectorCriteria, duration = 1.0): Promise<LifxEffectResult> {
         return this.client.post(`lights/${selector.getSelector()}/toggle`, {
             duration
         }).then((response: AxiosResponse) => {
@@ -31,7 +31,7 @@ export default class LifxFactory {
         });
     }
 
-    toggleEffectsOff(selector: SelectorCriteria, powerOff: boolean = false): Promise<LifxEffectResult> {
+    toggleEffectsOff(selector: SelectorCriteria, powerOff = false): Promise<LifxEffectResult> {
         return this.client.post(`lights/${selector.getSelector()}/effects/off`, {
             power_off: powerOff
         }).then((response: AxiosResponse) => {
