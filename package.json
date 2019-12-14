@@ -2,7 +2,7 @@
   "name": "lifx-http-api",
   "version": "2.0.0",
   "description": "Thin wrapper around the Lifx HTTP API",
-  "main": "index.js",
+  "main": "lib/.js",
   "dependencies": {
     "axios": "^0.19.0",
     "dotenv": "^8.2.0"
@@ -26,8 +26,7 @@
     "test:watch": "jest --watch",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "build": "npm run build:types && npm run build:js",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build": "npm run test && npm run type-check && npm run build:js",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
     "watch": "babel --watch src --out-dir lib --extensions \".ts,.tsx\""
   },

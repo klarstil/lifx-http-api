@@ -103,3 +103,13 @@ export interface LifxScene {
     created_at: number,
     updated_at: number
 }
+
+export interface LifxEffectResultDevice {
+    id: string,
+    label: string,
+    status: string
+}
+
+export interface LifxEffectResult {
+    results: LifxEffectResultDevice[]
+}

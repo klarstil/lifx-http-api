@@ -46,3 +46,6 @@ coverage
 
 # Ignore junit jest file
 junit.xml
+
+# Compiled library
+lib

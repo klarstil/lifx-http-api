@@ -5,10 +5,11 @@ import LifxDevice from '../../src/lifx/lifx-device';
 
 import lightsFixtures from '../../__fixtures__/lights';
 import sceneFixtures from '../../__fixtures__/scenes';
+import effectFixtures from '../../__fixtures__/effect';
 
 import mockAxios from 'jest-mock-axios';
 import { AxiosResponse } from 'axios';
-import { LifxScene } from '../../@types/lifx';
+import { LifxScene, LifxEffectResult } from '../../@types/lifx';
 
 dotenv.config();
 
@@ -36,11 +37,38 @@ describe('lifx factory', () => {
         const token = process.env.TOKEN as string;
         const factory = new LifxFactory(token);
 
-        factory.getScenes().then((response: AxiosResponse) => {
-            const scenes: LifxScene[] = response.data;
+        factory.getScenes().then((scenes: LifxScene[]) => {
             expect(scenes.length).toBe(2);
             done();
         });
         mockAxios.mockResponse({ data: sceneFixtures } as AxiosResponse);
+    });
+
+    it('should toggle power', (done) => {
+        const token = process.env.TOKEN as string;
+        const factory = new LifxFactory(token);
+        const selectorCriteria = (new SelectorCriteria())
+            .setAll();
+
+        factory.togglePower(selectorCriteria).then((result: LifxEffectResult) => {
+            expect(result.results.length).toBe(1);
+            done();
+        });
+
+        mockAxios.mockResponse({ data: effectFixtures } as AxiosResponse);
+    });
+
+    it('should toggle effects off', (done) => {
+        const token = process.env.TOKEN as string;
+        const factory = new LifxFactory(token);
+        const selectorCriteria = (new SelectorCriteria())
+            .setAll();
+
+        factory.toggleEffectsOff(selectorCriteria).then((result: LifxEffectResult) => {
+            expect(result.results.length).toBe(1);
+            done();
+        });
+
+        mockAxios.mockResponse({ data: effectFixtures } as AxiosResponse);
     });
 });
