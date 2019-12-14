@@ -2,11 +2,11 @@ import dotenv from 'dotenv';
 import LifxFactory from '../../src/lifx/lifx-factory';
 import SelectorCriteria from '../../src/criteria/selector-criteria';
 import LifxDevice from '../../src/lifx/lifx-device';
-
-import lightsFixtures from '../../__fixtures__/lights';
-import sceneFixtures from '../../__fixtures__/scenes';
-import effectFixtures from '../../__fixtures__/effect';
-
+import {
+    lightsFixtures,
+    sceneFixtures,
+    effectFixtures
+} from '../../__fixtures__/';
 import mockAxios from 'jest-mock-axios';
 import { AxiosResponse } from 'axios';
 import { LifxScene, LifxEffectResult } from '../../@types/lifx';
