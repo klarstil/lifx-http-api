@@ -2,3 +2,4 @@
 ![CircleCI](https://img.shields.io/circleci/build/github/klarstil/lifx-http-api/dev-2.0)
 ![GitHub](https://img.shields.io/github/license/klarstil/lifx-http-api)
 ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/klarstil/lifx-http-api)
+![npm](https://img.shields.io/npm/v/lifx-http-api)
