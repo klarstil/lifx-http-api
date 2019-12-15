@@ -11,10 +11,9 @@ export default class LifxFactory {
     }
 
     getLights(selector: SelectorCriteria): Promise<LifxApiDevice[]> {
-        return this.client.get(`lights/${selector.getSelector()}`)
-            .then((response: AxiosResponse) => {
-                return response.data as LifxApiDevice[];
-            });
+        return this.client.get(`lights/${selector.getSelector()}`).then((response: AxiosResponse) => {
+            return response.data as LifxApiDevice[];
+        });
     }
 
     getScenes(): Promise<LifxScene[]> {

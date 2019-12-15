@@ -34,7 +34,7 @@
     "build": "npm run test && npm run type-check && npm run build:js",
     "build:js": "babel src --out-dir lib --extensions \".ts\" --source-maps inline",
     "watch": "babel --watch src --out-dir lib --extensions \".ts\"",
-    "lint": "npm run type-check && eslint '*/**/*.{js,ts}' --fix"
+    "lint": "npm run type-check && eslint 'src/**/*.{js,ts}' --fix"
   },
   "repository": {
     "type": "git",
