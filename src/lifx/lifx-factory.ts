@@ -1,8 +1,9 @@
 import httpClientFactory from '../service/http-client';
 import { AxiosInstance, AxiosResponse } from 'axios';
 import SelectorCriteria from '../criteria/selector-criteria';
-import { LifxEffectResult, LifxScene, LifxApiDevice } from '../@types/lifx';
+import { LifxEffectResult, LifxScene, LifxApiDevice, LifxMultiStatesResult } from '../@types/lifx';
 import StateCriteria from '../state/state-criteria';
+import StateCollection from '../state/state-collection';
 
 export default class LifxFactory {
     client: AxiosInstance;
@@ -40,8 +41,24 @@ export default class LifxFactory {
     }
 
     setState(state: StateCriteria): Promise<LifxEffectResult> {
-        return this.client.put(`lights/${state.getSelector()}`,
+        return this.client.put(`lights/${state.getSelector()}/state`,
             state.getState()
+        ).then((response: AxiosResponse) => {
+            return response.data as LifxEffectResult;
+        });
+    }
+
+    setStates(states: StateCollection): Promise<LifxMultiStatesResult> {
+        return this.client.put('lights/states',
+            states.getStates()
+        ).then((response: AxiosResponse) => {
+            return response.data as LifxMultiStatesResult;
+        });
+    }
+
+    setStateDelta(state: StateCriteria): Promise<LifxEffectResult> {
+        return this.client.post(`lights/${state.getSelector()}/state/delta`,
+            state.getState(true)
         ).then((response: AxiosResponse) => {
             return response.data as LifxEffectResult;
         });

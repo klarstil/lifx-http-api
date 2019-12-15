@@ -6,11 +6,13 @@ import StateCriteria from '../../src/state/state-criteria';
 import {
     lightsFixtures,
     sceneFixtures,
-    effectFixtures
+    effectFixtures,
+    statesFixtures
 } from '../../__fixtures__/';
 import mockAxios from 'jest-mock-axios';
 import { AxiosResponse } from 'axios';
-import { LifxScene, LifxEffectResult } from '../../src/@types/lifx';
+import { LifxScene, LifxEffectResult, LifxMultiStatesResult } from '../../src/@types/lifx';
+import StateCollection from '../../src/state/state-collection';
 
 dotenv.config();
 
@@ -87,7 +89,40 @@ describe('lifx factory', () => {
         });
 
         mockAxios.mockResponse({ data: effectFixtures } as AxiosResponse);
+    });
 
-        done();
+    it('should set a states', (done) => {
+        const token = process.env.TOKEN as string;
+        const factory = new LifxFactory(token);
+        const selector = (new SelectorCriteria())
+            .setAll();
+
+        const state = new StateCriteria(selector);
+        state.setColor((new ColorCriteria()).setName('green'));
+        const collection = new StateCollection([state]);
+
+        factory.setStates(collection).then((result: LifxMultiStatesResult) => {
+            expect(result.results.length).toBe(2);
+            done();
+        });
+
+        mockAxios.mockResponse({ data: statesFixtures } as AxiosResponse);
+    });
+
+    it('should set a state delta', (done) => {
+        const token = process.env.TOKEN as string;
+        const factory = new LifxFactory(token);
+        const selector = (new SelectorCriteria())
+            .setAll();
+
+        const state = new StateCriteria(selector);
+        state.setColor((new ColorCriteria()).setName('green'));
+
+        factory.setStateDelta(state).then((result: LifxEffectResult) => {
+            expect(result.results.length).toBe(1);
+            done();
+        });
+
+        mockAxios.mockResponse({ data: effectFixtures } as AxiosResponse);
     });
 });

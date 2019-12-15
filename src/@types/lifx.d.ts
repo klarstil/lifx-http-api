@@ -117,7 +117,7 @@ export interface LifxEffectResult {
 
 export interface LifxMultiStatesOperations {
     operation: LifxStateOptions;
-    results: LifxEffectResult;
+    results?: LifxEffectResultDevice[];
     error?: string;
 }
 
