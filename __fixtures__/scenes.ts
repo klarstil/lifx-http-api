@@ -1,4 +1,4 @@
-import { LifxScene } from "../@types/lifx";
+import { LifxScene } from "../src/@types/lifx";
 
 const scenes: LifxScene[] = [
     {

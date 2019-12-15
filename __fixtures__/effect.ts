@@ -1,4 +1,4 @@
-import { LifxEffectResult } from "../@types/lifx";
+import { LifxEffectResult } from "../src/@types/lifx";
 
 const effects: LifxEffectResult = {
     "results": [

@@ -1,4 +1,4 @@
-import { LifxApiDevice } from "../@types/lifx";
+import { LifxApiDevice } from "../src/@types/lifx";
 
 const lights: LifxApiDevice[] = [{
     "id": "d073d5141876",
