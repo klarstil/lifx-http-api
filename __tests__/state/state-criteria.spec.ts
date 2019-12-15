@@ -1,16 +1,16 @@
-import StateCriteria from '../../src/criteria/state-criteria';
+import StateCriteria from '../../src/state/state-criteria';
 import SelectorCriteria from '../../src/criteria/selector-criteria';
 import ColorCriteria from '../../src/criteria/color-criteria';
 
 describe('state criteria', () => {
     it('should allow chaining', () => {
-        const selector = (new SelectorCriteria).setAll();
+        const selector = (new SelectorCriteria()).setAll();
         const criteria = new StateCriteria(selector);
         expect(criteria.setPower(false) instanceof StateCriteria).toBe(true);
     });
 
     it('should toggle the power flag', () => {
-        const selector = (new SelectorCriteria).setAll();
+        const selector = (new SelectorCriteria()).setAll();
         const criteria = new StateCriteria(selector);
 
         criteria.setPower(true);
@@ -27,7 +27,7 @@ describe('state criteria', () => {
     });
 
     it('should set the color flag', () => {
-        const selector = (new SelectorCriteria).setAll();
+        const selector = (new SelectorCriteria()).setAll();
         const criteria = new StateCriteria(selector);
         const color = (new ColorCriteria()).setHex('#fff000');
 
@@ -46,7 +46,7 @@ describe('state criteria', () => {
     });
 
     it('should set the brightness flag', () => {
-        const selector = (new SelectorCriteria).setAll();
+        const selector = (new SelectorCriteria()).setAll();
         const criteria = new StateCriteria(selector);
 
         criteria.setBrightness(0);
@@ -75,7 +75,7 @@ describe('state criteria', () => {
     });
 
     it('should set the infrared flag', () => {
-        const selector = (new SelectorCriteria).setAll();
+        const selector = (new SelectorCriteria()).setAll();
         const criteria = new StateCriteria(selector);
 
         criteria.setInfrared(0);
@@ -104,9 +104,17 @@ describe('state criteria', () => {
     });
 
     it('should return the selector', () => {
-        const selector = (new SelectorCriteria).setAll(true);
+        const selector = (new SelectorCriteria()).setAll(true);
         const criteria = new StateCriteria(selector);
         
         expect(criteria.getSelector()).toBe('all:random');
+    });
+
+    it('should throw an error when no selector was provided', () => {
+        const state = new StateCriteria();
+
+        expect(() => {
+            state.getSelector();
+        }).toThrow();
     });
 });

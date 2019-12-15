@@ -2,7 +2,7 @@ import httpClientFactory from '../service/http-client';
 import { AxiosInstance, AxiosResponse } from 'axios';
 import SelectorCriteria from '../criteria/selector-criteria';
 import { LifxEffectResult, LifxScene, LifxApiDevice } from '../@types/lifx';
-import StateCriteria from '../criteria/state-criteria';
+import StateCriteria from '../state/state-criteria';
 
 export default class LifxFactory {
     client: AxiosInstance;

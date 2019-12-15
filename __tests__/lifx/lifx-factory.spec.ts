@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import LifxFactory from '../../src/lifx/lifx-factory';
 import SelectorCriteria from '../../src/criteria/selector-criteria';
 import ColorCriteria from '../../src/criteria/color-criteria';
-import StateCriteria from '../../src/criteria/state-criteria';
+import StateCriteria from '../../src/state/state-criteria';
 import {
     lightsFixtures,
     sceneFixtures,

@@ -148,8 +148,11 @@ describe('selector criteria', () => {
         }).toThrow();
     });
     
-    it('should return null if no selector is provided', () => {
+    it('should throw an error when no selector is provided', () => {
         const criteria = new SelectorCriteria();
-        expect(criteria.getSelector()).toBe(null);
+
+        expect(() => {
+            criteria.getSelector();
+        }).toThrow();
     });
 });

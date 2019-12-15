@@ -1,3 +1,5 @@
+import { runInThisContext } from "vm";
+
 export default class SelectorCriteria {
     selectors: string[];
 
@@ -81,10 +83,15 @@ export default class SelectorCriteria {
         return this;
     }
 
-    getSelector(): string|null {
+    getSelector(): string {
         if (this.selectors.length > 25) {
             throw Error('Selector chain too long, maximal 25 combined selectors are allowed');
         }
-        return this.selectors.join(',') || null;
+
+        if (!this.selectors.length) {
+            throw Error('Selector chain is empty');
+        }
+
+        return this.selectors.join(',');
     }
 }

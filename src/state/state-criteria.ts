@@ -1,9 +1,9 @@
-import ColorCriteria from "./color-criteria";
-import SelectorCriteria from "./selector-criteria";
+import ColorCriteria from "../criteria/color-criteria";
+import SelectorCriteria from "../criteria/selector-criteria";
 import { LifxStateOptions } from "../@types/lifx";
 
 export default class StateCriteria {
-    selector: SelectorCriteria;
+    selector: null|SelectorCriteria;
     power: null|string;
     color: null|string;
     brightness: null|number;
@@ -11,7 +11,7 @@ export default class StateCriteria {
     infrared: null|number;
     fast: boolean;
 
-    constructor(selector: SelectorCriteria) {
+    constructor(selector: null|SelectorCriteria = null) {
         this.selector = selector;
         this.power = null;
         this.color = null;
@@ -55,7 +55,7 @@ export default class StateCriteria {
         return this;
     }
 
-    getState(): LifxStateOptions {
+    getState(noFastParam: boolean = false): LifxStateOptions {
         const config = {
             power: this.power,
             color: this.color,
@@ -65,6 +65,10 @@ export default class StateCriteria {
             fast: this.fast
         };
 
+        if (noFastParam) {
+            delete config.fast;
+        }
+
         return Object.entries(config).reduce((accumulator: object, [key, value]) => {
             if (value !== null) {
                 accumulator = { ...accumulator, ...{ [key]: value } };
@@ -73,7 +77,11 @@ export default class StateCriteria {
         }, {});
     }
 
-    getSelector(): string|null {
+    getSelector(): string {
+        if (!this.selector || !this.selector.selectors.length) {
+            throw Error('Selector chain is not provided');
+        }
+
         return this.selector.getSelector();
     }
 }
