@@ -9,6 +9,6 @@
 	},
 	"baseUrl": "./src",
 	"include": [
-		"src", "@types"
+		"src", "src/@types"
 	]
 }

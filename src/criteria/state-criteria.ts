@@ -1,6 +1,6 @@
 import ColorCriteria from "./color-criteria";
 import SelectorCriteria from "./selector-criteria";
-import { LifxStateOptions } from "../../@types/lifx";
+import { LifxStateOptions } from "../@types/lifx";
 
 export default class StateCriteria {
     selector: SelectorCriteria;

@@ -1,7 +1,8 @@
 import httpClientFactory from '../service/http-client';
 import { AxiosInstance, AxiosResponse } from 'axios';
 import SelectorCriteria from '../criteria/selector-criteria';
-import { LifxEffectResult, LifxScene, LifxApiDevice } from '../../@types/lifx';
+import { LifxEffectResult, LifxScene, LifxApiDevice } from '../@types/lifx';
+import StateCriteria from '../criteria/state-criteria';
 
 export default class LifxFactory {
     client: AxiosInstance;
@@ -34,6 +35,14 @@ export default class LifxFactory {
         return this.client.post(`lights/${selector.getSelector()}/effects/off`, {
             power_off: powerOff
         }).then((response: AxiosResponse) => {
+            return response.data as LifxEffectResult;
+        });
+    }
+
+    setState(state: StateCriteria): Promise<LifxEffectResult> {
+        return this.client.put(`lights/${state.getSelector()}`,
+            state.getState()
+        ).then((response: AxiosResponse) => {
             return response.data as LifxEffectResult;
         });
     }
