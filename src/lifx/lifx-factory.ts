@@ -63,4 +63,25 @@ export default class LifxFactory {
             return response.data as LifxEffectResult;
         });
     }
+
+    setCycle(selector: SelectorCriteria, states: StateCollection, direction = 'forward') {
+        const directions = [
+            'forward',
+            'backward'
+        ];
+
+        direction = direction.toLowerCase();
+
+        if (!directions.includes(direction)) {
+            throw Error(`Direction "${direction}" is not valid, please provide one of the following values: ${directions.join(', ')}`);
+        }
+
+        const statesParams = { ...states.getStates(false), ...{ direction } };
+
+        return this.client.post(`lights/${selector.getSelector()}/`,
+            statesParams
+        ).then((response: AxiosResponse) => {
+            return response.data as LifxMultiStatesResult;
+        });
+    }
 }

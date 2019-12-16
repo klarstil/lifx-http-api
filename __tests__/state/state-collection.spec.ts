@@ -17,7 +17,7 @@ describe('state collection', () => {
             states.push(state);
         }
         const collection = new StateCollection(states);
-        expect(collection.states.size).toBe(10);
+        expect(collection.size).toBe(10);
     });
 
     it('should add a new state', () => {
@@ -26,7 +26,7 @@ describe('state collection', () => {
         const state = (new StateCriteria(selector)).setBrightness(100);
 
         collection.add(state);
-        expect(collection.states.size).toBe(1);
+        expect(collection.size).toBe(1);
 
         expect(() => {
             collection.add(state);
@@ -40,11 +40,6 @@ describe('state collection', () => {
             }],
             fast: false
         });
-
-        const stateWithoutSelector = new StateCriteria();
-        expect(() => {
-            collection.add(stateWithoutSelector);
-        }).toThrow();
     });
 
     it('should force add a new state', () => {
@@ -53,7 +48,7 @@ describe('state collection', () => {
         const state = (new StateCriteria(selector)).setBrightness(100);
 
         collection.add(state);
-        expect(collection.states.size).toBe(1);
+        expect(collection.size).toBe(1);
 
         expect(collection.getStates()).toStrictEqual({
             states: [{
@@ -66,7 +61,7 @@ describe('state collection', () => {
 
         state.setBrightness(50);
         collection.add(state, true);
-        expect(collection.states.size).toBe(1);
+        expect(collection.size).toBe(1);
 
         expect(collection.getStates()).toStrictEqual({
             states: [{
@@ -88,16 +83,26 @@ describe('state collection', () => {
         expect(collection.get(state.getSelector())).toBe(state);
     });
 
+    it('should check if a state is added already', () => {
+        const collection = new StateCollection();
+        const selector = (new SelectorCriteria()).setGroup(`foo`);
+        const state = (new StateCriteria(selector)).setBrightness(75);
+
+        collection.add(state);
+
+        expect(collection.has(state)).toBe(true);
+    });
+
     it('should remove a given state from the collection', () => {
         const collection = new StateCollection();
         const selector = (new SelectorCriteria()).setAll();
         const state = (new StateCriteria(selector)).setBrightness(100);
 
         collection.add(state);
-        expect(collection.states.size).toBe(1);
+        expect(collection.size).toBe(1);
 
         collection.remove(state);
-        expect(collection.states.size).toBe(0);
+        expect(collection.size).toBe(0);
 
         const nonExistingState = (new StateCriteria(selector)).setBrightness(100);
         
@@ -154,9 +159,9 @@ describe('state collection', () => {
 
         collection.add(state);
         
-        expect(collection.states.size).toBe(1);
+        expect(collection.size).toBe(1);
         collection.clear();
 
-        expect(collection.states.size).toBe(0);
+        expect(collection.size).toBe(0);
     });
 });

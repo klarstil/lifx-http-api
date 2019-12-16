@@ -125,4 +125,26 @@ describe('lifx factory', () => {
 
         mockAxios.mockResponse({ data: effectFixtures } as AxiosResponse);
     });
+
+    it('should set a cycle animation', (done) => {
+        const token = process.env.TOKEN as string;
+        const factory = new LifxFactory(token);
+        const selector = (new SelectorCriteria())
+            .setAll();
+
+        const state = new StateCriteria();
+        state.setColor((new ColorCriteria()).setName('green'));
+        const collection = new StateCollection([state]);
+
+        factory.setCycle(selector, collection).then((result: LifxMultiStatesResult) => {
+            expect(result.results.length).toBe(2);
+            done();
+        });
+
+        mockAxios.mockResponse({ data: statesFixtures } as AxiosResponse);
+
+        expect(() => {
+            factory.setCycle(selector, collection, 'foobar');
+        }).toThrow();
+    })
 });

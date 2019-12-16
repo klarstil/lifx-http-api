@@ -55,7 +55,7 @@ export default class StateCriteria {
         return this;
     }
 
-    getState(noFastParam: boolean = false): LifxStateOptions {
+    getState(noFastParam = false): LifxStateOptions {
         const config = {
             power: this.power,
             color: this.color,
@@ -79,7 +79,7 @@ export default class StateCriteria {
 
     getSelector(): string {
         if (!this.selector || !this.selector.selectors.length) {
-            throw Error('Selector chain is not provided');
+            throw Error('Selector is not provided');
         }
 
         return this.selector.getSelector();

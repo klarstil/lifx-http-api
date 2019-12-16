@@ -1,12 +1,12 @@
 import StateCriteria from "./state-criteria";
 
 export default class StateCollection {
-    states: Map<string, StateCriteria>;
+    states: StateCriteria[];
     defaults: StateCriteria|null;
     fast: boolean;
 
-    constructor(states: StateCriteria[] = [], fast: boolean = false) {
-        this.states = new Map();
+    constructor(states: StateCriteria[] = [], fast = false) {
+        this.states = [];
         this.defaults = null;
         this.fast = fast;
 
@@ -19,51 +19,62 @@ export default class StateCollection {
         this.defaults = state;
         return this;
     }
-
-    get(selector: string): StateCriteria|undefined {
-        return this.states.get(selector);
-    }
     
-    add(state: StateCriteria, force: boolean = false): StateCollection {
-        const selector = state.getSelector();
-
-        if (!force && this.has(state)) {
-            throw Error(`State for selector "${selector}" already exists in collection`);
+    add(state: StateCriteria, replace = false): StateCollection {
+        const index = this.states.indexOf(state);
+        
+        if (index !== -1) {
+            if (replace) {
+                this.states[index] = state;
+            } else {
+                throw Error('State exists in collection already')
+            }
+        } else {
+            this.states.push(state);
         }
 
-        this.states.set(selector, state);
-
         return this;
-    }
-
-    has(state: StateCriteria): boolean {
-        return this.states.has(state.getSelector());
     }
 
     remove(state: StateCriteria): StateCollection {
-        const selector = state.getSelector();
-        
-        if (!this.has(state)) {
-            throw Error(`State for selector "${selector}" is not in collection`);
+        const index = this.states.indexOf(state);
+        if (index === -1) {
+            throw Error(`State is not in collection`);
         }
 
-        this.states.delete(selector);
+        this.states.splice(index, 1);
 
         return this;
+    }
+
+    get(selector: string): StateCriteria|undefined {
+        return this.states.find((state: StateCriteria): boolean => {
+            return state.getSelector() === selector;
+        });
+    }
+
+    has(state: StateCriteria) {
+        return this.states.indexOf(state) !== -1;
     }
 
     clear(): StateCollection {
-        this.states.clear();
+        this.states = [];
         return this;
     }
 
-    getStates(): object {
-        if (this.states.size > 50) {
+    getStates(includeSelector = true): object {
+        if (this.states.length > 50) {
             throw Error('State collection is too large, no more than 50 entires allowed');
         }
 
-        const states = Array.from(this.states).map(([selector, value]: [string, StateCriteria]) => {
-            return { ...value.getState(true), ...{ selector: selector }};
+        const states = this.states.map((state: StateCriteria) => {
+            let params = state.getState(true);
+
+            if (includeSelector) {
+                params = { ...params, ...{ selector: state.getSelector() } };
+            }
+
+            return params;
         });
 
         let params = {
@@ -76,5 +87,9 @@ export default class StateCollection {
         }
 
         return params;
+    }
+
+    get size() {
+        return this.states.length;
     }
 }
